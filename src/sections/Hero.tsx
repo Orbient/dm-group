@@ -75,7 +75,7 @@ export default function Hero({ ready }: { ready: boolean }) {
       )}
 
       <div className="relative z-10 mx-auto flex h-full max-w-[1600px] flex-col px-5 pt-24 md:px-10 md:pt-28">
-        <p data-fade data-hero-ui className="eyebrow opacity-0">{company.city} · проект · производство · монтаж</p>
+        <div data-hero-ui><p data-fade className="eyebrow opacity-0">{company.city} · проект · производство · монтаж</p></div>
 
         <h1 ref={title} className="display metal mt-3 select-none whitespace-nowrap text-[min(calc((100vw-40px)/5.7),272px)] md:text-[min(calc((100vw-80px)/5.7),272px)] leading-[0.82] tracking-[0.06em] md:mt-1">
           <span className="sr-only">DM Group — лестницы и лестничные ограждения в Екатеринбурге</span>
