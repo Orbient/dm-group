@@ -1,0 +1,77 @@
+@import "@fontsource-variable/jost/wght.css";
+@import "@fontsource-variable/manrope/wght.css";
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #060606;
+  --color-coal: #0d0d0c;
+  --color-ash: #16151380;
+  --color-bone: #ece7df;
+  --color-mute: #8b857b;
+  --color-dim: #57534c;
+  --color-oak: #c99b62;
+  --color-line: rgb(255 255 255 / 0.09);
+  --font-display: "Jost Variable", "Futura", sans-serif;
+  --font-sans: "Manrope Variable", system-ui, sans-serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+:root { color-scheme: dark; }
+html { background: var(--color-ink); }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+body {
+  background: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+::selection { background: var(--color-oak); color: var(--color-ink); }
+
+/* Display type: light, wide, tracked — the reference's sculptural Futura feel */
+.display { font-family: var(--font-display); font-weight: 300; text-transform: uppercase; letter-spacing: 0.08em; line-height: 0.95; }
+.eyebrow { font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--color-mute); }
+
+/* Brushed-metal title: bright at the top, sinking into the photo at the bottom */
+.metal {
+  background: linear-gradient(180deg, #fbfaf7 0%, #c9c6c0 38%, #77736c 62%, rgb(120 116 108 / 0.18) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+.hairline { border-color: var(--color-line); }
+
+/* Pill button from the reference: thin outline, round arrow companion */
+.pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  height: 46px; padding: 0 22px; border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+  transition: background-color .5s var(--ease-out-expo), color .5s var(--ease-out-expo), border-color .5s;
+}
+.pill:hover { background: var(--color-bone); color: var(--color-ink); border-color: var(--color-bone); }
+.pill-solid { background: var(--color-bone); color: var(--color-ink); border-color: var(--color-bone); }
+.pill-solid:hover { background: var(--color-oak); border-color: var(--color-oak); }
+.arrow-dot {
+  display: inline-grid; place-items: center; width: 46px; height: 46px; border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / 0.18); transition: transform .6s var(--ease-out-expo), background-color .4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+@keyframes scrollhint { 0% { transform: translateY(-100%); } 100% { transform: translateY(200%); } }
+
+/* Film grain: one static tile on its own fixed layer. No blend mode and no animation,
+   so the compositor paints it once instead of re-blending the whole page every frame. */
+.grain {
+  position: fixed; inset: 0; z-index: 60; pointer-events: none;
+  background-repeat: repeat; background-size: 160px 160px;
+  opacity: 0.2; transform: translateZ(0);
+}
+html[data-tier='low'] .grain { display: none; }
